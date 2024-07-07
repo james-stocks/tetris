@@ -3,3 +3,6 @@ Library/
 Logs/
 Temp/
 UserSettings/
+
+# VS Code files
+.vscode
