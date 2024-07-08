@@ -14,19 +14,35 @@ public struct Tile {
 
 public class PlayfieldController : MonoBehaviour
 {
-    // Texture2D holding tile image
+    // Material and texture for a single tile
     public Material tileMaterial;
     public Texture2D tileTexture;
+
+    public float tileScale = 0.32f;
 
     private Tile[,] tiles;
 
     // Start is called before the first frame update
     void Start()
     {
-
         tileMaterial.SetTexture("_MainTex", tileTexture);
         tiles = new Tile[24,10];
         InitTiles();
+    }
+
+    void Update()
+    {
+        RenderParams rp = new RenderParams(tileMaterial);
+        // Render the tiles
+        for (int y = 0; y < tiles.GetLength(0); y++) {
+            for (int x = 0; x < tiles.GetLength(1); x++)
+            {
+                if(tiles[y,x].solid) {
+                    Graphics.RenderMesh(rp, tiles[y,x].mesh, 0,
+                        Matrix4x4.Translate(new Vector3(-2.5f + 0.32f * x, -3.5f + 0.32f * y, 0.1f)));
+                }
+            }
+        }
     }
 
     private void InitTiles() {
@@ -42,9 +58,8 @@ public class PlayfieldController : MonoBehaviour
         }
     }
 
+    // Generate a quad for a tile
     private Mesh TileQuadMesh() {
-        float width = 0.32f;
-        float height = 0.32f; 
         MeshFilter mf = GetComponent<MeshFilter>();
         var mesh = new Mesh();
         mf.mesh = mesh;
@@ -52,9 +67,9 @@ public class PlayfieldController : MonoBehaviour
         Vector3[] vertices = new Vector3[4];
         
         vertices[0] = new Vector3(0, 0, 0);
-        vertices[1] = new Vector3(width, 0, 0);
-        vertices[2] = new Vector3(0, height, 0);
-        vertices[3] = new Vector3(width, height, 0);
+        vertices[1] = new Vector3(tileScale, 0, 0);
+        vertices[2] = new Vector3(0, tileScale, 0);
+        vertices[3] = new Vector3(tileScale, tileScale, 0);
         
         mesh.vertices = vertices;
         
@@ -89,20 +104,5 @@ public class PlayfieldController : MonoBehaviour
         mesh.uv = uv;
 
         return mesh;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        RenderParams rp = new RenderParams(tileMaterial);
-        // Render the tiles
-        for (int y = 0; y < tiles.GetLength(0); y++) {
-            for (int x = 0; x < tiles.GetLength(1); x++)
-            {
-                if(tiles[y,x].solid) {
-                    Graphics.RenderMesh(rp, tiles[y,x].mesh, 0,  Matrix4x4.Translate(new Vector3(-2.5f + 0.32f * x, -3.5f + 0.32f * y, 0.1f)));
-                }
-            }
-        }
     }
 }
