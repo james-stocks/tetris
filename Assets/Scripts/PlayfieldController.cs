@@ -18,7 +18,7 @@ public class PlayfieldController : MonoBehaviour
     public Material tileMaterial;
     public Texture2D tileTexture;
 
-    public float tileScale = 0.32f;
+    public float tileScale = 0.35f;
 
     private Tile[,] tiles;
 
@@ -39,7 +39,7 @@ public class PlayfieldController : MonoBehaviour
             {
                 if(tiles[y,x].solid) {
                     Graphics.RenderMesh(rp, tiles[y,x].mesh, 0,
-                        Matrix4x4.Translate(new Vector3(-2.5f + 0.32f * x, -3.5f + 0.32f * y, 0.1f)));
+                        Matrix4x4.Translate(new Vector3(-2.5f + tileScale * x, -3.5f + tileScale * y, 0.1f)));
                 }
             }
         }

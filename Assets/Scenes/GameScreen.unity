@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   tileTexture: {fileID: 2800000, guid: 976eb440f548a1a1e8318fd3bab6eab9, type: 3}
+  tileScale: 0.35
 --- !u!64 &144526511
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -543,8 +544,8 @@ Transform:
   m_GameObject: {fileID: 1746957144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.05, y: 0.21, z: 2}
-  m_LocalScale: {x: 4, y: 9.2, z: 1}
+  m_LocalPosition: {x: -0.9, y: 0.64, z: 2}
+  m_LocalScale: {x: 4.3, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
